@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[5] = {10, 20, 30, 40, 50};
+    int key;
+
+    cout << "Enter element to search: ";
+    cin >> key;
+
+    int low = 0;
+    int high = 4;
+    int mid;
+    bool found = false;
+
+    while (low <= high)
+    {
+        mid = (low + high) / 2;
+
+        if (arr[mid] == key)
+        {
+            cout << "Element found at position " << mid + 1;
+            found = true;
+            break;
+        }
+        else if (key < arr[mid])
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "Element not found";
+    }
+
+    return 0;
+}
