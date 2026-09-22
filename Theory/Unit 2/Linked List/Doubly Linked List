@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+int main()
+{
+    Node* head = NULL;
+    Node* newNode;
+    Node* temp;
+
+    // First node
+    newNode = new Node();
+    newNode->data = 10;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    head = newNode;
+
+    // Second node
+    newNode = new Node();
+    newNode->data = 20;
+    newNode->prev = head;
+    newNode->next = NULL;
+    head->next = newNode;
+
+    // Third node
+    newNode = new Node();
+    newNode->data = 30;
+    newNode->prev = head->next;
+    newNode->next = NULL;
+    head->next->next = newNode;
+
+    // Display forward
+    cout << "Doubly Linked List: ";
+
+    temp = head;
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " <-> ";
+        temp = temp->next;
+    }
+
+    cout << "NULL";
+
+    return 0;
+}
+
