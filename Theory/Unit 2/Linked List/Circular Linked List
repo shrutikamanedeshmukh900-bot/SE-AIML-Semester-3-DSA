@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+};
+
+int main()
+{
+    Node* head = NULL;
+    Node* newNode;
+    Node* temp;
+
+    // First node
+    newNode = new Node();
+    newNode->data = 10;
+    newNode->next = NULL;
+    head = newNode;
+
+    // Second node
+    newNode = new Node();
+    newNode->data = 20;
+    newNode->next = NULL;
+    head->next = newNode;
+
+    // Third node
+    newNode = new Node();
+    newNode->data = 30;
+    newNode->next = head->next;
+    head->next->next = newNode;
+
+    // Make circular
+    head->next->next->next = head;
+
+    // Display
+    cout << "Circular Linked List: ";
+
+    temp = head;
+
+    do
+    {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+    while (temp != head);
+
+    cout << "HEAD";
+
+    return 0;
+}
+
