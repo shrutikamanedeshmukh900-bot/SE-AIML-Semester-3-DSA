@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+};
+
+int main()
+{
+    Node* head = NULL;
+    Node* newNode;
+    Node* temp;
+
+    // Creating nodes
+    newNode = new Node();
+    newNode->data = 10;
+    newNode->next = NULL;
+    head = newNode;
+
+    newNode = new Node();
+    newNode->data = 20;
+    newNode->next = NULL;
+    head->next = newNode;
+
+    newNode = new Node();
+    newNode->data = 30;
+    newNode->next = NULL;
+    head->next->next = newNode;
+
+    // Display linked list
+    temp = head;
+
+    cout << "Singly Linked List: ";
+
+    while (temp != NULL)
+    {
+        cout << temp->data << " -> ";
+        temp = temp->next;
+    }
+
+    cout << "NULL";
+
+    return 0;
+}
+
