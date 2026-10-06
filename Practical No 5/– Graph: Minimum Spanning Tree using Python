@@ -1,0 +1,121 @@
+INF = 999999
+
+graph = [
+    [0, 4, 2, 0, 0],
+    [4, 0, 1, 5, 0],
+    [2, 1, 0, 8, 10],
+    [0, 5, 8, 0, 2],
+    [0, 0, 10, 2, 0]
+]
+
+vertices = ["Computer", "IT", "Mechanical", "Library", "Office"]
+V = len(vertices)
+
+
+# ---------------- Prim ---------------- #
+
+def prim():
+    selected = [False] * V
+    selected[0] = True
+
+    edges = 0
+    cost = 0
+
+    print("\nMinimum Spanning Tree using Prim\n")
+
+    while edges < V - 1:
+        minimum = INF
+        x = 0
+        y = 0
+
+        for i in range(V):
+            if selected[i]:
+                for j in range(V):
+                    if not selected[j] and graph[i][j]:
+                        if graph[i][j] < minimum:
+                            minimum = graph[i][j]
+                            x = i
+                            y = j
+
+        print(vertices[x], "--", vertices[y], "=", graph[x][y])
+
+        cost += graph[x][y]
+        selected[y] = True
+        edges += 1
+
+    print("\nMinimum Cost =", cost)
+
+
+# ---------------- Kruskal ---------------- #
+
+parent = []
+
+
+def find(i):
+    while parent[i] != i:
+        i = parent[i]
+    return i
+
+
+def union(i, j):
+    a = find(i)
+    b = find(j)
+    parent[a] = b
+
+
+def kruskal():
+    edges = []
+
+    for i in range(V):
+        for j in range(i + 1, V):
+            if graph[i][j] != 0:
+                edges.append((graph[i][j], i, j))
+
+    edges.sort()
+
+    for i in range(V):
+        parent.append(i)
+
+    cost = 0
+
+    print("\nMinimum Spanning Tree using Kruskal\n")
+
+    count = 0
+
+    for w, u, v in edges:
+        if find(u) != find(v):
+            union(u, v)
+
+            print(vertices[u], "--", vertices[v], "=", w)
+
+            cost += w
+            count += 1
+
+            if count == V - 1:
+                break
+
+    print("\nMinimum Cost =", cost)
+
+
+# ---------------- Main Program ---------------- #
+
+while True:
+    print("\n1. Prim")
+    print("2. Kruskal")
+    print("3. Exit")
+
+    ch = int(input("Enter Choice : "))
+
+    if ch == 1:
+        prim()
+
+    elif ch == 2:
+        parent.clear()
+        kruskal()
+
+    elif ch == 3:
+        print("Program Ended")
+        break
+
+    else:
+        print("Invalid Choice")
